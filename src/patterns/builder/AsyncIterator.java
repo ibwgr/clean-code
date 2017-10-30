@@ -3,17 +3,13 @@ package patterns.builder;
 public class AsyncIterator {
 
   /**
-   * Creates a new iterator and starts it.
-   *
-   * Parameters:
-   * 		(Runnable) callback - the function to be called, must return a future
-   * 		(Integer)  delay - optional. The delay, no delay (or 0) will be ignored
-   * 		(Integer)  maxIterations - optional. Maximum number of iterations that will be made
-   * 								 no value (or 0) will run indefinitely until cancelled
-   * 		(Boolean)  keepAlive - optional. If set to true, the interval service will not
-   * 	                          automatically	be cancelled on a state change.
+   * @param callback the function to be called, must return a future
+   * @param delay optional. The delay, no delay (or 0) will be ignored
+   * @param maxIterations optional. Maximum number of iterations that will be made
+   *                      no value (or 0) will run indefinitely until cancelled
+   * @param keepAlive optional. If set to true, the interval service will not
+   *                  automatically	be cancelled on a state change.
    */
-
   static void iterate(Runnable callback, Integer delay, Integer maxIterations, Boolean keepAlive){
     // callback.run();
   }
@@ -26,7 +22,6 @@ public class AsyncIterator {
   static class Builder {
     private Integer delay;
     private Integer maxIterations;
-    private Runnable callback;
     private Boolean keepAlive;
 
     Builder withDelay(Integer delay) {
