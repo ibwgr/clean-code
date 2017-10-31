@@ -9,6 +9,6 @@ public class Main {
     BigDecimal loan;
     loan = new Calc(null).loan(new Employee(), null);
 
-    loan = BetterCalc.noTaxes().monthlyLoan(new Employee());
+    loan = BetterCalc.createWithoutTaxes().monthlyLoan(new Employee());
   }
 }

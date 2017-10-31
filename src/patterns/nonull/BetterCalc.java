@@ -11,11 +11,11 @@ public class BetterCalc {
     this.tax = tax;
   }
 
-  public static BetterCalc noTaxes() {
+  public static BetterCalc createWithoutTaxes() {
     return new BetterCalc(null);
   }
 
-  public static BetterCalc withTaxes(TaxCalc tax) {
+  public static BetterCalc createWithTaxes(TaxCalc tax) {
     return new BetterCalc(tax);
   }
 
