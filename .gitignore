@@ -118,3 +118,4 @@ hs_err_pid*
 /clean-code-challanges/build/
 /.idea/codeStyles/
 /.idea/hotswap_agent.xml
+!gradle-wrapper.jar
