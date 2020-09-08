@@ -116,3 +116,4 @@ hs_err_pid*
 
 /clean-code-challanges/.gradle/
 /clean-code-challanges/build/
+/.idea/codeStyles/
