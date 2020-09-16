@@ -14,10 +14,12 @@
  * There are a few more rules for edge cases, and there are regional variants too.
  *
  * See http://en.wikipedia.org/wiki/Pig_latin for more details.
+ * Test
  */
 public class PigLatinTranslator {
 
   public String translate(String englishPhrase) {
+
     return null;
   }
 }
