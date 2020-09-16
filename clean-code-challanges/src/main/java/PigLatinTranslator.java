@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Implement a program that translates from English to Pig Latin.
  *
@@ -22,4 +24,11 @@ public class PigLatinTranslator {
 
     return null;
   }
+
+
+  public static void main(String[] args) {
+    
+  }
+
+
 }
