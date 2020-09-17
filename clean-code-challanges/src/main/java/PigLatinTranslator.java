@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Implement a program that translates from English to Pig Latin.
  *
@@ -18,6 +20,75 @@
 public class PigLatinTranslator {
 
   public String translate(String englishPhrase) {
-    return null;
+    Phrase phrase = new Phrase(englishPhrase);
+
+    if (phrase.beginsWithVowelSound()){
+      phrase.appendSuffix();
+    }else if (phrase.beginsWithConsonantCluster()){
+      phrase.moveFirstLatterToTheEndOfWord();
+      phrase.moveFirstLatterToTheEndOfWord();
+      phrase.appendSuffix();
+
+    }else{
+      phrase.moveFirstLatterToTheEndOfWord();
+      phrase.appendSuffix();
+
+    }
+
+  return phrase.getPhrase();
   }
+
+
+
+
+  private String moveConsonantClusterToTheEndOfWord(String word){
+    String returnString = word.substring(2) + word.charAt(0) + word.charAt(1);
+    return returnString;
+  }
+
 }
+
+class Phrase {
+  private String phrase;
+  private ArrayList<String> vowelSounds = new ArrayList<>();
+  private ArrayList<String> consonantClusters = new ArrayList<>();
+  private String suffix = "ay";
+
+  Phrase(String phrase){
+    this.phrase = phrase;
+
+    vowelSounds.add("a");
+    vowelSounds.add("e");
+    vowelSounds.add("i");
+    vowelSounds.add("o");
+    vowelSounds.add("u");
+
+    consonantClusters.add("ch");
+  }
+
+  public boolean beginsWithVowelSound(){
+    String firstLetter =  String.valueOf(this.phrase.charAt(0)).toLowerCase();
+    return vowelSounds.contains(firstLetter);
+  }
+
+
+  public boolean beginsWithConsonantCluster(){
+    String firstTwoLetters =  String.valueOf(this.phrase.charAt(0)).toLowerCase() + String.valueOf(this.phrase.charAt(1)).toLowerCase();
+    return consonantClusters.contains(firstTwoLetters);
+  }
+
+
+  public void appendSuffix() {
+    this.phrase = this.phrase + this.suffix;
+  }
+
+  public void moveFirstLatterToTheEndOfWord(){
+    this.phrase = this.phrase.substring(1) + this.phrase.charAt(0);
+  }
+
+  public String getPhrase(){
+    return this.phrase;
+  }
+
+}
+
