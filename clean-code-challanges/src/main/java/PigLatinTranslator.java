@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Implement a program that translates from English to Pig Latin.
@@ -18,24 +20,48 @@ import java.util.ArrayList;
  * See http://en.wikipedia.org/wiki/Pig_latin for more details.
  */
 public class PigLatinTranslator {
+  private ArrayList<Word> words = new ArrayList<>();
+
 
   public String translate(String englishPhrase) {
-    Phrase phrase = new Phrase(englishPhrase);
 
-    if (phrase.beginsWithVowelSound()){
-      phrase.appendSuffix();
-    }else if (phrase.beginsWithConsonantCluster()){
-      phrase.moveFirstLatterToTheEndOfWord();
-      phrase.moveFirstLatterToTheEndOfWord();
-      phrase.appendSuffix();
 
-    }else{
-      phrase.moveFirstLatterToTheEndOfWord();
-      phrase.appendSuffix();
+    List<String> str = new ArrayList<>();
+    str = Arrays.asList(englishPhrase.split(" "));
+
+    for (String s:str){
+      words.add(new Word(s));
+    }
+
+
+
+
+    for (Word word :words){
+
+      if (word.beginsWithVowelSound()) {
+        word.appendSuffix();
+      } else if ( word.beginsWithVowelSoundCluster()){
+        word.appendSuffix();
+      }else if (word.beginsWithConsonantCluster()){
+        word.moveFirstLatterToTheEndOfWord();
+        word.moveFirstLatterToTheEndOfWord();
+        word.appendSuffix();
+
+      }else{
+        word.moveFirstLatterToTheEndOfWord();
+        word.appendSuffix();
+
+      }
 
     }
 
-  return phrase.getPhrase();
+    String translatedString = "";
+
+    for (Word word : words){
+      translatedString = translatedString + word.getPhrase();
+    }
+
+  return translatedString;
   }
 
 
@@ -48,22 +74,41 @@ public class PigLatinTranslator {
 
 }
 
-class Phrase {
+class Word {
   private String phrase;
   private ArrayList<String> vowelSounds = new ArrayList<>();
   private ArrayList<String> consonantClusters = new ArrayList<>();
+  private ArrayList<String>  vowelSoundsCluster = new ArrayList<>();
   private String suffix = "ay";
 
-  Phrase(String phrase){
+  Word(String phrase){
     this.phrase = phrase;
 
+    initializeVovelSounds();
+    initializeConsonantClusters();
+
+    initializeVowelSoundCluster();
+
+  }
+
+
+
+  private void initializeVowelSoundCluster() {
+    vowelSoundsCluster.add("yt");
+    vowelSoundsCluster.add("xr");
+  }
+
+  private void initializeConsonantClusters() {
+    consonantClusters.add("ch");
+    consonantClusters.add("th");
+  }
+
+  private void initializeVovelSounds() {
     vowelSounds.add("a");
     vowelSounds.add("e");
     vowelSounds.add("i");
     vowelSounds.add("o");
     vowelSounds.add("u");
-
-    consonantClusters.add("ch");
   }
 
   public boolean beginsWithVowelSound(){
@@ -71,6 +116,10 @@ class Phrase {
     return vowelSounds.contains(firstLetter);
   }
 
+  public boolean beginsWithVowelSoundCluster(){
+    String firstTwoLetters =  String.valueOf(this.phrase.charAt(0)).toLowerCase() + String.valueOf(this.phrase.charAt(1)).toLowerCase();
+    return vowelSoundsCluster.contains(firstTwoLetters);
+  }
 
   public boolean beginsWithConsonantCluster(){
     String firstTwoLetters =  String.valueOf(this.phrase.charAt(0)).toLowerCase() + String.valueOf(this.phrase.charAt(1)).toLowerCase();
