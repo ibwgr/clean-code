@@ -22,8 +22,8 @@ public class PigLatinTranslator {
     String translation = "";
     String [] englishWords = englishPhrase.toLowerCase().split(" ");
 
-    for (String word : englishWords){
-      translation += translateWord(word);
+    for (String wordToTranslate : englishWords){
+      translation += translateWord(wordToTranslate);
       translation += " ";
     }
     return translation.trim();
@@ -36,7 +36,7 @@ public class PigLatinTranslator {
       translatedWord = word + "ay";
     } else if (consonantFollowedByQU(word) || startsWithThreeConsonants(word)){
       translatedWord = word.substring(3) + word.substring(0, 3) + "ay";
-    } else if (startsWithTwoConsonants(word)){
+    } else if (startsWithTwoConsonants(word) || word.startsWith("qu")){
       translatedWord = word.substring(2) + word.substring(0,2) + "ay";
     } else {
       translatedWord = word.substring(1) + word.charAt(0) + "ay";
@@ -60,16 +60,18 @@ public class PigLatinTranslator {
   }
 
   private boolean startsWithThreeConsonants(String word){
-    return  (word.startsWith("thr") || word.startsWith("sch"));
+    String vowels = "aeiou";
+    char letterOne = word.charAt(0);
+    char letterTwo = word.charAt(1);
+    char letterThree = word.charAt(2);
+    return (vowels.indexOf(letterOne) == -1 && vowels.indexOf(letterTwo) == -1 && vowels.indexOf(letterThree) == -1);
   }
 
   private boolean startsWithTwoConsonants(String word){
-    return  (word.startsWith("ch") || word.startsWith("qu") || word.startsWith("th"));
+    String vowels = "aeiou";
+    char letterOne = word.charAt(0);
+    char letterTwo = word.charAt(1);
+    return (vowels.indexOf(letterOne) == -1 && vowels.indexOf(letterTwo) == -1);
   }
 
-
-
-  public static void main(String[] args) {
-    System.out.println(new PigLatinTranslator().translate("BLue"));
-  }
 }
