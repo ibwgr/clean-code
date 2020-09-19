@@ -18,6 +18,33 @@
 public class PigLatinTranslator {
 
   public String translate(String englishPhrase) {
-    return null;
+    String result = "";
+    String attachment = "ay";
+    String separator = "\\s+";
+    String [] words = englishPhrase.split(separator);
+
+    if (englishPhrase.contains(" ")) {
+      attachment = "ay ";
+    }
+
+    for (int word = 0; word < words.length; word++) {
+      if (isVowel(words[word].charAt(0)) || words[word].substring(0, 2).equals("xr") || words[word].substring(0, 2).equals("yt")) {
+        result += words[word] + attachment;
+      } else {
+        if (words[word].substring(1, 3).equals("qu")) {
+          result += words[word].substring(3) + words[word].substring(0, 3) + attachment;
+        } else {
+          result += words[word].substring(1) + words[word].substring(0, 1) + attachment;
+        }
+      }
+    }
+    return result;
   }
-}
+
+  public static Boolean isVowel(char character){
+    if (character == 'a' || character == 'e' || character == 'i' || character == 'o' || character == 'u') {
+      return true;
+    }
+      return false;
+    }
+  }

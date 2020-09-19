@@ -1,3 +1,5 @@
+package java;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -7,6 +9,7 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
+@SuppressWarnings("ALL")
 @RunWith(Parameterized.class)
 public class PigLatinTranslatorTest {
 
@@ -65,7 +68,7 @@ public class PigLatinTranslatorTest {
 
   @Test
   public void test() {
-    assertEquals(pigLatinTranslation, new PigLatinTranslator().translate(englishPhrase));
+    assertEquals(pigLatinTranslation, new java.PigLatinTranslator().translate(englishPhrase));
   }
 
 }
