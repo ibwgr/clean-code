@@ -18,6 +18,41 @@
 public class PigLatinTranslator {
 
   public String translate(String englishPhrase) {
-    return null;
+
+    String translation = "";
+    String [] englishWords = englishPhrase.toLowerCase().split(" ");
+
+    for (String word : englishWords){
+      translation += translateWord(word);
+      translation += " ";
+    }
+    return translation.trim();
+  }
+
+  private String translateWord (String word){
+    String translatedWord = "";
+
+    if(startsWithVowel(word) || startsWithVowelEdgeCase(word)){
+      translatedWord = word + "ay";
+    } else {
+      translatedWord = word.substring(1) + word.charAt(0) + "ay";
+    }
+    return translatedWord;
+  }
+
+  private boolean startsWithVowel(String word){
+    String vowels = "aeiou";
+    char letter = word.charAt(0);
+    return (vowels.indexOf(letter) != -1);
+  }
+
+  private boolean startsWithVowelEdgeCase(String word){
+    return (word.startsWith("xr") || word.startsWith("yt"));
+  }
+
+
+
+  public static void main(String[] args) {
+    System.out.println(new PigLatinTranslator().translate("apple"));
   }
 }
