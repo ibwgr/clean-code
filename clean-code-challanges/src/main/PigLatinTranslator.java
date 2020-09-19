@@ -28,24 +28,24 @@ public class PigLatinTranslator {
 
     String translation = "";
 
-    String qu = englishPhrase.substring(1, 3);
+    String quCluster = englishPhrase.substring(1, 3);
 
 
-    boolean isVokal = PigLatinTranslator.findFirstVokal(englishPhrase.charAt(0));
+    boolean isVowel = PigLatinTranslator.findFirstVowel(englishPhrase.charAt(0));
 
-    if (isVokal) {
+    if (isVowel) {
 
-      System.out.println(translation = translation + englishPhrase + "ay");
+      System.out.println(translation += englishPhrase + "ay");
     }
 
      else if (englishPhrase.substring(0, 2).equals("xr") || englishPhrase.substring(0,2).equals("yt")){
 
-      System.out.println(translation = translation + englishPhrase + "ay");
+      System.out.println(translation += englishPhrase + "ay");
     }
 
-     else if(qu.equals("qu")){
+     else if(quCluster.equals("qu")){
 
-      System.out.println( englishPhrase.substring(3) +  englishPhrase.substring(0,1) + qu + "ay");
+      System.out.println( englishPhrase.substring(3) +  englishPhrase.substring(0,1) + quCluster + "ay");
     }
 
      else if (englishPhrase.substring(0, 2).equals("qu")){
@@ -56,66 +56,61 @@ public class PigLatinTranslator {
 
     else {
 
-      String cluster = PigLatinTranslator.findKonsonantenCluster(englishPhrase);
-      translation = translation + englishPhrase.substring(englishPhrase.indexOf(cluster) + cluster.length()) + cluster + "ay";
+      String cluster = PigLatinTranslator.findConsonantCluster(englishPhrase);
+      translation += englishPhrase.substring(englishPhrase.indexOf(cluster) + cluster.length()) + cluster + "ay";
+
       System.out.println(translation);
     }
 
 
     return translation;
-
   }
 
 
-  private static boolean findFirstVokal(char firstVokal){
+  private static boolean findFirstVowel(char firstVowel){
 
-    String vokale = "aeiou";
+    String vowels = "aeiou";
 
+    boolean isVowel = false;
 
-    boolean istVokal = false;
+    for (int i = 0; i < vowels.length(); i++){
 
-    for (int i = 0; i < vokale.length(); i++){
+      char letter = vowels.charAt(i);
 
-      char letter = vokale.charAt(i);
+      if (letter == firstVowel){
 
-      if (letter == firstVokal){
-
-        istVokal = true;
+        isVowel = true;
 
         break;
       }
     }
 
-    return istVokal;
+    return isVowel;
   }
 
-  private static String findKonsonantenCluster(String cluster){
+  private static String findConsonantCluster(String cluster){
 
-
-    String konsCluster = "";
+    String consCluster = "";
 
     for (int i = 0; i < cluster.length(); i++){
 
-      if (PigLatinTranslator.findFirstVokal(cluster.charAt(i)) ) {
+      if (PigLatinTranslator.findFirstVowel(cluster.charAt(i)) ) {
 
         break;
       }
 
       else {
 
-        konsCluster = konsCluster + cluster.charAt(i);
+        consCluster += cluster.charAt(i);
       }
     }
 
-    return konsCluster;
+    return consCluster;
   }
-
-
 
 
   public static void main(String[] args){
 
     translate("queen");
-
   }
 }
