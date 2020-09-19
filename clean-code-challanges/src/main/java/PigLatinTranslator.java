@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Implement a program that translates from English to Pig Latin.
  *
@@ -18,6 +21,56 @@
 public class PigLatinTranslator {
 
   public String translate(String englishPhrase) {
-    return null;
+    String[] words = spiltAndReplace(englishPhrase);
+
+    System.out.println(followedByQu(words[0]));
+
+    for (int i = 0; i < words.length; i++) {
+      while (!beginsWithVowel(words[i]) && !followedByQu(words[i]) && !followedByY(words[i])) {
+        words[i] = moveNCharToEnd(words[i], 1);
+      }
+
+      if (followedByQu(words[i])) {
+        words[i] = moveNCharToEnd(words[i], 3);
+      }
+
+      if (followedByY(words[i])){
+        words[i] = moveNCharToEnd(words[i], 1);
+      }
+
+      words[i] = addAy(words[i]);
+    }
+
+    return String.join(" ", words);
+  }
+
+  private String[] spiltAndReplace(String englishPhrase) {
+    String[] words = englishPhrase.split(" ");
+    for (int i = 0; i < words.length; i++) {
+      words[i] = words[i].replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+    }
+    return words;
+  }
+
+  public boolean beginsWithVowel(String word) {
+    List<Character> vowelChars = Arrays.asList('a', 'i', 'e', 'o', 'u');
+    String[] vowelStrings = {"xr", "yt"};
+    return vowelChars.contains(word.charAt(0)) || Arrays.asList(vowelStrings).contains(word.substring(0, 2));
+  }
+
+  public boolean followedByQu(String word) {
+    return word.substring(1, 3).contains("qu");
+  }
+
+  public boolean followedByY(String word) {
+    return word.substring(1,2).contains("y");
+  }
+
+  public String moveNCharToEnd(String word, int numberOfChar) {
+    return word.substring(numberOfChar) + word.substring(0, numberOfChar);
+  }
+
+  public String addAy(String word) {
+    return word + "ay";
   }
 }
