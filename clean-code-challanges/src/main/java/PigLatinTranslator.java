@@ -39,8 +39,8 @@ class Phrase {
   }
 
   public void translateToPigLatin() {
-    for (String sourceWord : this.sourcePhrase){
-      this.translatedPhrase.add(translateWordToPigLatin(sourceWord));
+    for (String sourceWord : sourcePhrase){
+      translatedPhrase.add(translateWordToPigLatin(sourceWord));
     }
   }
 
@@ -85,48 +85,48 @@ class Word {
 
 
   public boolean beginsWithVowelSound(){
-    String firstLetter =  this.word.substring(0,1).toLowerCase();
+    String firstLetter =  word.substring(0,1).toLowerCase();
     return vowelSounds.contains(firstLetter);
   }
 
   public boolean beginsWithVowelSoundCluster(){
-    String firstTwoLetters =  this.word.substring(0,2).toLowerCase();
+    String firstTwoLetters =  word.substring(0,2).toLowerCase();
     return vowelSoundsCluster.contains(firstTwoLetters);
   }
 
   public boolean beginsWithDoubleConsonantCluster(){
-    String firstTwoLetters =  this.word.substring(0,2).toLowerCase();
+    String firstTwoLetters =  word.substring(0,2).toLowerCase();
     return doubleConsonantClusters.contains(firstTwoLetters);
   }
 
   public boolean beginsWithTripleConsonantCluster(){
-    String firstThreeLetters = this.word.substring(0,3).toLowerCase();
+    String firstThreeLetters = word.substring(0,3).toLowerCase();
     return tripleConsonantClusters.contains(firstThreeLetters);
   }
 
   public boolean firstConsonantFollowedByQU( ){
-    String secondAndThirdLetter =  this.word.substring(1,3).toLowerCase();
+    String secondAndThirdLetter =  word.substring(1,3).toLowerCase();
     return (secondAndThirdLetter.equals(specialCombo));
   }
 
   public void appendSuffix() {
-    this.word = this.word + this.suffix;
+    word = word + suffix;
   }
 
   public void moveFirstLetterToTheEndOfWord(){
-    this.word = this.word.substring(1) + this.word.charAt(0);
+    word = word.substring(1) + word.charAt(0);
   }
 
   public void moveFirstTwoLettersToTheEndOfWord(){
-    this.word = this.word.substring(2) + this.word.charAt(0) + this.word.charAt(1);
+    word = word.substring(2) + word.charAt(0) + word.charAt(1);
   }
 
   public void moveFirstThreeLettersToTheEndOfWord(){
-    this.word = this.word.substring(3) + this.word.charAt(0) + this.word.charAt(1) + this.word.charAt(2);
+    word = word.substring(3) + word.charAt(0) + word.charAt(1) + word.charAt(2);
   }
 
   public String getString(){
-    return this.word;
+    return word;
   }
 
 }
