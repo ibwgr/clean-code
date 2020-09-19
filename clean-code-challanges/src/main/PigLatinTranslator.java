@@ -1,8 +1,6 @@
 package main;
 
-
-import java.util.ArrayList;
-import java.util.List;
+;
 
 /**
  * Implement a program that translates from English to Pig Latin.
@@ -25,50 +23,54 @@ import java.util.List;
 public class PigLatinTranslator {
 
 
-
-
   public static String translate(String englishPhrase) {
 
 
-    String[] sentence = englishPhrase.split(" ");
+    String translation = "";
+
+    String qu = englishPhrase.substring(1, 3);
 
 
-    for (String value : sentence) {
+    boolean isVokal = PigLatinTranslator.findFirstVokal(englishPhrase.charAt(0));
 
-      char s = value.charAt(0);
+    if (isVokal) {
 
-
-      if (findFirstVokal(s)) {
-
-        System.out.println(value + "ay");
-      }
-
-      if (findKonsonantenCluster(value).equals("xr") || findKonsonantenCluster(value).equals("yt")){
-
-        System.out.println(value + "ay");
-
-      }
-
-
-
-
-      else {
-
-        int wordLenght = findKonsonantenCluster(value).length();
-
-        System.out.println(value.substring(wordLenght) + findKonsonantenCluster(value));
-
-      }
+      System.out.println(translation = translation + englishPhrase + "ay");
     }
 
-    return null;
-  }
+     else if (englishPhrase.substring(0, 2).equals("xr") || englishPhrase.substring(0,2).equals("yt")){
 
+      System.out.println(translation = translation + englishPhrase + "ay");
+    }
+
+     else if(qu.equals("qu")){
+
+      System.out.println( englishPhrase.substring(3) +  englishPhrase.substring(0,1) + qu + "ay");
+    }
+
+     else if (englishPhrase.substring(0, 2).equals("qu")){
+
+      System.out.println(englishPhrase.substring(2) + englishPhrase.substring(0,2) + "ay");
+    }
+
+
+    else {
+
+      String cluster = PigLatinTranslator.findKonsonantenCluster(englishPhrase);
+      translation = translation + englishPhrase.substring(englishPhrase.indexOf(cluster) + cluster.length()) + cluster + "ay";
+      System.out.println(translation);
+    }
+
+
+    return translation;
+
+  }
 
 
   private static boolean findFirstVokal(char firstVokal){
 
     String vokale = "aeiou";
+
 
     boolean istVokal = false;
 
@@ -92,7 +94,6 @@ public class PigLatinTranslator {
 
     String konsCluster = "";
 
-
     for (int i = 0; i < cluster.length(); i++){
 
       if (PigLatinTranslator.findFirstVokal(cluster.charAt(i)) ) {
@@ -105,6 +106,7 @@ public class PigLatinTranslator {
         konsCluster = konsCluster + cluster.charAt(i);
       }
     }
+
     return konsCluster;
   }
 
@@ -113,7 +115,7 @@ public class PigLatinTranslator {
 
   public static void main(String[] args){
 
-    translate("das ist ein brotes gelbes auto xray yttio");
+    translate("queen");
 
   }
 }
