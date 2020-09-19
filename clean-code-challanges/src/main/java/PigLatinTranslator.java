@@ -34,6 +34,10 @@ public class PigLatinTranslator {
 
     if(startsWithVowel(word) || startsWithVowelEdgeCase(word)){
       translatedWord = word + "ay";
+    } else if (consonantFollowedByQU(word) || startsWithThreeConsonants(word)){
+      translatedWord = word.substring(3) + word.substring(0, 3) + "ay";
+    } else if (startsWithTwoConsonants(word)){
+      translatedWord = word.substring(2) + word.substring(0,2) + "ay";
     } else {
       translatedWord = word.substring(1) + word.charAt(0) + "ay";
     }
@@ -50,9 +54,22 @@ public class PigLatinTranslator {
     return (word.startsWith("xr") || word.startsWith("yt"));
   }
 
+  private boolean consonantFollowedByQU(String word){
+    String quCheck = word.substring(1, 3);
+    return quCheck.equals("qu");
+  }
+
+  private boolean startsWithThreeConsonants(String word){
+    return  (word.startsWith("thr") || word.startsWith("sch"));
+  }
+
+  private boolean startsWithTwoConsonants(String word){
+    return  (word.startsWith("ch") || word.startsWith("qu") || word.startsWith("th"));
+  }
+
 
 
   public static void main(String[] args) {
-    System.out.println(new PigLatinTranslator().translate("apple"));
+    System.out.println(new PigLatinTranslator().translate("BLue"));
   }
 }
