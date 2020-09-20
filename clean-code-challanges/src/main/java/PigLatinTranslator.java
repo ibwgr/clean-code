@@ -24,12 +24,12 @@ public class PigLatinTranslator {
     String[] words = splitAndReplace(englishPhrase);
 
     for (int i = 0; i < words.length; i++) {
-      while (!beginswithVowelSound(words[i]) && !firstLetterFollowedBayQu(words[i]) && !firstLetterFollowedByY(words[i])) {
+      while (!beginswithVowelSound(words[i]) && !beginsWithQu(words[i]) && !firstLetterFollowedByY(words[i])) {
         words[i] = moveNCharToEnd(words[i], 1);
       }
 
-      if (firstLetterFollowedBayQu(words[i])) {
-        words[i] = moveNCharToEnd(words[i], 3);
+      if (beginsWithQu(words[i])) {
+        words[i] = moveNCharToEnd(words[i], 2);
       }
 
       if (firstLetterFollowedByY(words[i])){
@@ -56,8 +56,8 @@ public class PigLatinTranslator {
     return vowelChars.contains(word.charAt(0)) || Arrays.asList(vowelStrings).contains(word.substring(0, 2));
   }
 
-  public boolean firstLetterFollowedBayQu(String word) {
-    return word.substring(1, 3).contains("qu");
+  public boolean beginsWithQu(String word) {
+    return word.substring(0, 2).contains("qu");
   }
 
   public boolean firstLetterFollowedByY(String word) {
