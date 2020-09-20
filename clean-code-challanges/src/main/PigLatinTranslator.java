@@ -67,7 +67,7 @@ public class PigLatinTranslator {
   }
 
 
-  private static boolean findFirstVowel(char firstVowel){
+  private static boolean findFirstVowel(char firstLetter){
 
     String vowels = "aeiou";
 
@@ -75,9 +75,9 @@ public class PigLatinTranslator {
 
     for (int i = 0; i < vowels.length(); i++){
 
-      char letter = vowels.charAt(i);
+      char vowel = vowels.charAt(i);
 
-      if (letter == firstVowel){
+      if (vowel == firstLetter){
 
         isVowel = true;
 
