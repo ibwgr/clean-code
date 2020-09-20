@@ -32,8 +32,6 @@ public class PigLatinTranslator {
     Pattern startWithYt = Pattern.compile("^yt");
     Pattern startWithXr = Pattern.compile("^xr");
 
-    String str = Character.toString(ch);
-
     String s;
     if (ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u') {
       s = englishPhrase + "ay";
