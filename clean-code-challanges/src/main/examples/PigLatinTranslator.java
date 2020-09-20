@@ -20,6 +20,7 @@ public class PigLatinTranslator {
   public String translate(String englishPhrase) {
     String result = "";
     String attachment = "ay";
+    int position = 0;
     String separator = "\\s+";
     String [] words = englishPhrase.split(separator);
 
@@ -27,14 +28,20 @@ public class PigLatinTranslator {
       attachment = "ay ";
     }
 
-    for (int word = 0; word < words.length; word++) {
-      if (isVowel(words[word].charAt(0)) || words[word].substring(0, 2).equals("xr") || words[word].substring(0, 2).equals("yt")) {
-        result += words[word] + attachment;
+    for (int i = 0; i < words.length; i++) {
+      for (char j = 0; j < words[i].length(); j++) {
+        if (isVowel(words[i].charAt(j))) {
+          position = j;
+          break;
+        }
+      }
+      if (isVowel(words[i].charAt(0)) || words[i].substring(0, 2).equals("xr") || words[i].substring(0, 2).equals("yt")) {
+        result += words[i] + attachment;
       } else {
-        if (words[word].substring(1, 3).equals("qu")) {
-          result += words[word].substring(3) + words[word].substring(0, 3) + attachment;
+        if (words[i].substring(1, 3).equals("qu")) {
+          result += words[i].substring(3) + words[i].substring(0, 3) + attachment;
         } else {
-          result += words[word].substring(1) + words[word].substring(0, 1) + attachment;
+          result += words[i].substring(position) + words[i].substring(0, position) + attachment;
         }
       }
     }
