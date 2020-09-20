@@ -1,3 +1,8 @@
+package main.java;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Implement a program that translates from English to Pig Latin.
  *
@@ -17,7 +22,56 @@
  */
 public class PigLatinTranslator {
 
-  public String translate(String englishPhrase) {
-    return null;
+  public static String translate (String englishPhrase){
+    char ch = englishPhrase.charAt(0);
+
+    Pattern startWithSqu = Pattern.compile("^squ");
+    Pattern startWithTh = Pattern.compile("^th");
+    Pattern startWithThr = Pattern.compile("^thr");
+    Pattern startWithSch = Pattern.compile("^sch");
+    Pattern startWithYt = Pattern.compile("^yt");
+    Pattern startWithXr = Pattern.compile("^xr");
+
+    String str = Character.toString(ch);
+
+    String s;
+    if (ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u') {
+      s = englishPhrase + "ay";
+//            System.out.println(s);
+    } else if (ch=='c') {
+      s = englishPhrase.substring(2) + "chay";
+
+    } else if (ch=='q') {
+      s = englishPhrase.substring(2) + "quay";
+
+    } else if (startWithSqu.matcher(englishPhrase).find()) {
+      s = englishPhrase.substring(3) + "squay";
+//            System.out.println(s);
+
+    } else if (startWithThr.matcher(englishPhrase).find()) {
+      s = englishPhrase.substring(3) + "thray";
+//            System.out.println(s);
+
+    } else if (startWithTh.matcher(englishPhrase).find()) {
+      s = englishPhrase.substring(2) + "thay";
+//            System.out.println(s);
+
+    } else if (startWithSch.matcher(englishPhrase).find()) {
+      s = englishPhrase.substring(3) + "schay";
+//            System.out.println(s);
+
+    } else if (startWithYt.matcher(englishPhrase).find()) {
+      s = englishPhrase + "ay";
+//            System.out.println(s);
+
+    } else if (startWithXr.matcher(englishPhrase).find()) {
+      s = englishPhrase + "ay";
+//            System.out.println(s);
+
+    } else {
+      s = englishPhrase.substring(1) + englishPhrase.charAt(0) + "ay";
+//            System.out.println(s);
+    }
+    return s;
   }
 }
