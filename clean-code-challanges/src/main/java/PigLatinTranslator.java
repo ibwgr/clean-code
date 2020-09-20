@@ -37,7 +37,6 @@ public class PigLatinTranslator {
     String s;
     if (ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u') {
       s = englishPhrase + "ay";
-//            System.out.println(s);
     } else if (ch=='c') {
       s = englishPhrase.substring(2) + "chay";
 
@@ -46,31 +45,24 @@ public class PigLatinTranslator {
 
     } else if (startWithSqu.matcher(englishPhrase).find()) {
       s = englishPhrase.substring(3) + "squay";
-//            System.out.println(s);
 
     } else if (startWithThr.matcher(englishPhrase).find()) {
       s = englishPhrase.substring(3) + "thray";
-//            System.out.println(s);
 
     } else if (startWithTh.matcher(englishPhrase).find()) {
       s = englishPhrase.substring(2) + "thay";
-//            System.out.println(s);
 
     } else if (startWithSch.matcher(englishPhrase).find()) {
       s = englishPhrase.substring(3) + "schay";
-//            System.out.println(s);
 
     } else if (startWithYt.matcher(englishPhrase).find()) {
       s = englishPhrase + "ay";
-//            System.out.println(s);
 
     } else if (startWithXr.matcher(englishPhrase).find()) {
       s = englishPhrase + "ay";
-//            System.out.println(s);
 
     } else {
       s = englishPhrase.substring(1) + englishPhrase.charAt(0) + "ay";
-//            System.out.println(s);
     }
     return s;
   }
