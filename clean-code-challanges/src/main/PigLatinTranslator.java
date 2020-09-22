@@ -26,7 +26,6 @@ public class PigLatinTranslator {
   public static String translate(String englishPhrase) {
 
 
-
     String translation = "";
 
 
