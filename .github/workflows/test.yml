@@ -6,12 +6,13 @@ on:
     - 'clean-code-challanges/**'
     branches: [ master ]
 
+defaults:
+  run:
+    working-directory: clean-code-challanges
+    
 jobs:
   test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: clean-code-challanges
 
     steps:
       - uses: actions/checkout@v2
