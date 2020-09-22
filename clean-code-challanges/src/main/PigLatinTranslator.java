@@ -109,6 +109,6 @@ public class PigLatinTranslator {
 
   public static void main(String[] args){
 
-    translate("queen");
+    translate("square");
   }
 }
