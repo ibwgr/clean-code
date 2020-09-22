@@ -2,6 +2,8 @@ name: JUnit Tests
 
 on:
   pull_request:
+    paths:
+      - 'clean-code-challanges/**'
     branches: [ master ]
 
 jobs:
@@ -15,8 +17,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+        working-directory: clean-code-challanges
 
       - name: Run tests
         uses: eskatos/gradle-command-action@v1
         with:
           arguments: test
+        working-directory: clean-code-challanges
