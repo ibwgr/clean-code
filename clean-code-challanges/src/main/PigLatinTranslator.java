@@ -26,7 +26,9 @@ public class PigLatinTranslator {
   public static String translate(String englishPhrase) {
 
 
+
     String translation = "";
+
 
     String quCluster = englishPhrase.substring(1, 3);
 
@@ -35,22 +37,22 @@ public class PigLatinTranslator {
 
     if (isVowel) {
 
-      System.out.println(translation += englishPhrase + "ay");
+      return translation + (englishPhrase + "ay");
     }
 
      else if (englishPhrase.substring(0, 2).equals("xr") || englishPhrase.substring(0,2).equals("yt")){
 
-      System.out.println(translation += englishPhrase + "ay");
+      return translation + (englishPhrase + "ay");
     }
 
      else if(quCluster.equals("qu")){
 
-      System.out.println( englishPhrase.substring(3) +  englishPhrase.substring(0,1) + quCluster + "ay");
+      return englishPhrase.substring(3) +  englishPhrase.substring(0,1) + quCluster + "ay";
     }
 
      else if (englishPhrase.substring(0, 2).equals("qu")){
 
-      System.out.println(englishPhrase.substring(2) + englishPhrase.substring(0,2) + "ay");
+      return englishPhrase.substring(2) + englishPhrase.substring(0,2) + "ay";
     }
 
 
@@ -59,11 +61,8 @@ public class PigLatinTranslator {
       String cluster = PigLatinTranslator.findConsonantCluster(englishPhrase);
       translation += englishPhrase.substring(englishPhrase.indexOf(cluster) + cluster.length()) + cluster + "ay";
 
-      System.out.println(translation);
+      return translation;
     }
-
-
-    return translation;
   }
 
 
