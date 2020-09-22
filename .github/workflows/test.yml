@@ -9,18 +9,19 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: clean-code-challanges
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Set up JDK
-        working-directory: clean-code-challanges
         uses: actions/setup-java@v1
         with:
           java-version: 11
 
       - name: Run tests
-        working-directory: clean-code-challanges
         uses: eskatos/gradle-command-action@v1
         with:
           arguments: test
