@@ -51,15 +51,15 @@ class Phrase {
 
   private String translateWordToPigLatin(String sourceWord){
       Word word = new Word(sourceWord);
-      if  (word.beginsWithTripleConsonantCluster() || word.firstConsonantFollowedByQU()){
-        word.moveFirstThreeLettersToTheEndOfWord();
 
-      }else if (word.beginsWithDoubleConsonantCluster()) {
-        word.moveFirstTwoLettersToTheEndOfWord();
-
-      }else if (!word.beginsWithVowelSound() && !word.beginsWithVowelSoundCluster() ){
+      while ( word.beginsWithConsonant() && !word.beginsWithQU() ){
         word.moveFirstLetterToTheEndOfWord();
       }
+
+      if (word.beginsWithQU()){
+        word.moveFirstTwoLettersToTheEndOfWord();
+      }
+
       word.appendSuffix();
 
       return word.getString();
@@ -68,45 +68,34 @@ class Phrase {
 }
 
 
-
 class Word {
   private String word;
   private ArrayList<String> vowelSounds = new ArrayList<>(Arrays.asList("a", "e", "i", "o", "u"));
-  private ArrayList<String> doubleConsonantClusters = new ArrayList<>(Arrays.asList("ch", "th", "qu"));
-  private ArrayList<String> tripleConsonantClusters = new ArrayList<>(Arrays.asList("thr", "sch"));
   private ArrayList<String>  vowelSoundsCluster = new ArrayList<>(Arrays.asList("yt", "xr"));
   private String specialCombo = "qu";
   private String suffix = "ay";
-
 
   Word(String word){
     this.word = word;
   }
 
-
-  public boolean beginsWithVowelSound(){
+  private boolean beginsWithVowelSound(){
     String firstLetter =  word.substring(0,1).toLowerCase();
     return vowelSounds.contains(firstLetter);
   }
 
-  public boolean beginsWithVowelSoundCluster(){
+  private boolean beginsWithVowelSoundCluster(){
     String firstTwoLetters =  word.substring(0,2).toLowerCase();
     return vowelSoundsCluster.contains(firstTwoLetters);
   }
 
-  public boolean beginsWithDoubleConsonantCluster(){
+  public boolean beginsWithConsonant(){
+    return !beginsWithVowelSound() && !beginsWithVowelSoundCluster();
+  }
+
+  public boolean beginsWithQU( ){
     String firstTwoLetters =  word.substring(0,2).toLowerCase();
-    return doubleConsonantClusters.contains(firstTwoLetters);
-  }
-
-  public boolean beginsWithTripleConsonantCluster(){
-    String firstThreeLetters = word.substring(0,3).toLowerCase();
-    return tripleConsonantClusters.contains(firstThreeLetters);
-  }
-
-  public boolean firstConsonantFollowedByQU( ){
-    String secondAndThirdLetter =  word.substring(1,3).toLowerCase();
-    return (secondAndThirdLetter.equals(specialCombo));
+    return (firstTwoLetters.equals(specialCombo));
   }
 
   public void appendSuffix() {
@@ -119,10 +108,6 @@ class Word {
 
   public void moveFirstTwoLettersToTheEndOfWord(){
     word = word.substring(2) + word.charAt(0) + word.charAt(1);
-  }
-
-  public void moveFirstThreeLettersToTheEndOfWord(){
-    word = word.substring(3) + word.charAt(0) + word.charAt(1) + word.charAt(2);
   }
 
   public String getString(){
