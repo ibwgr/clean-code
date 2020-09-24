@@ -24,12 +24,12 @@ public class PigLatinTranslator {
     String[] words = splitAndReplace(englishPhrase);
 
     for (int i = 0; i < words.length; i++) {
-      while (!beginsWithVowelSound(words[i]) && !beginsWithQu(words[i]) || firstLetterFollowedByY(words[i])) {
-        words[i] = moveNCharToEnd(words[i], 1);
+      while (!beginsWithVowelSound(words[i]) && !words[i].substring(0, 2).contains("qu") || words[i].substring(1,2).contains("y")) {
+        words[i] = moveCharsSetToEnd(words[i], 1);
       }
 
-      if (beginsWithQu(words[i])) {
-        words[i] = moveNCharToEnd(words[i], 2);
+      if (words[i].substring(0, 2).contains("qu")) {
+        words[i] = moveCharsSetToEnd(words[i], 2);
       }
 
       words[i] = words[i] + "ay";
@@ -43,24 +43,17 @@ public class PigLatinTranslator {
     for (int i = 0; i < words.length; i++) {
       words[i] = words[i].replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
     }
+
     return words;
   }
 
   public boolean beginsWithVowelSound(String word) {
     List<Character> vowelChars = Arrays.asList('a', 'i', 'e', 'o', 'u');
-    List<String> vowelStrings = Arrays.asList("xr", "yt");
-    return vowelChars.contains(word.charAt(0)) || vowelStrings.contains(word.substring(0, 2));
+    List<String> vowelSounds = Arrays.asList("xr", "yt");
+    return vowelChars.contains(word.charAt(0)) || vowelSounds.contains(word.substring(0, 2));
   }
 
-  public boolean beginsWithQu(String word) {
-    return word.substring(0, 2).contains("qu");
-  }
-
-  public boolean firstLetterFollowedByY(String word) {
-    return word.substring(1,2).contains("y");
-  }
-
-  public String moveNCharToEnd(String word, int numberOfChar) {
+  public String moveCharsSetToEnd(String word, int numberOfChar) {
     return word.substring(numberOfChar) + word.substring(0, numberOfChar);
   }
 }
