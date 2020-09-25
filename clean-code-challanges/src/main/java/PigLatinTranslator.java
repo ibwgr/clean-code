@@ -17,6 +17,8 @@
  */
 public class PigLatinTranslator {
 
+  public static final String ENDING = "ay";
+
   public String translate(String englishPhrase) {
 
     String translation = "";
@@ -35,11 +37,11 @@ public class PigLatinTranslator {
     if(startsWithVowel(word) || startsWithVowelEdgeCase(word)){
       translatedWord = word + "ay";
     } else if (consonantFollowedByQU(word) || startsWithThreeConsonants(word)){
-      translatedWord = word.substring(3) + word.substring(0, 3) + "ay";
+      translatedWord = word.substring(3) + word.substring(0, 3) + ENDING;
     } else if (startsWithTwoConsonants(word) || word.startsWith("qu")){
-      translatedWord = word.substring(2) + word.substring(0,2) + "ay";
+      translatedWord = word.substring(2) + word.substring(0,2) + ENDING;
     } else {
-      translatedWord = word.substring(1) + word.charAt(0) + "ay";
+      translatedWord = word.substring(1) + word.charAt(0) + ENDING;
     }
     return translatedWord;
   }
