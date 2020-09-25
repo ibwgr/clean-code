@@ -17,39 +17,40 @@
  */
 public class PigLatinTranslator {
 
-  public static final String ENDING = "ay";
+  private static final String VOWELS = "aeiou";
+  private static final String ENDING = "ay";
 
   public String translate(String englishPhrase) {
 
-    String translation = "";
+    StringBuilder translation = new StringBuilder();
     String [] englishWords = englishPhrase.toLowerCase().split(" ");
 
     for (String wordToTranslate : englishWords){
-      translation += translateWord(wordToTranslate);
-      translation += " ";
+      translation.append(translateWord(wordToTranslate));
+      translation.append(" ");
     }
-    return translation.trim();
+    return translation.toString().trim();
   }
 
   private String translateWord (String word){
-    String translatedWord = "";
+    String translatedWord;
 
     if(startsWithVowel(word) || startsWithVowelEdgeCase(word)){
       translatedWord = word + ENDING;
-    } else if (consonantFollowedByQU(word) || startsWithThreeConsonants(word)){
-      translatedWord = word.substring(3) + word.substring(0, 3) + ENDING;
-    } else if (startsWithTwoConsonants(word) || word.startsWith("qu")){
-      translatedWord = word.substring(2) + word.substring(0,2) + ENDING;
+    } else if (consonantFollowedByQU(word)){
+      translatedWord = reArrangeWord(word, 3) + ENDING;
+    } else if (word.startsWith("qu")){
+      translatedWord = reArrangeWord(word, 2) + ENDING;
     } else {
-      translatedWord = word.substring(1) + word.charAt(0) + ENDING;
+      int consonantsBeforeVowel = countConsonants(word);
+      translatedWord = reArrangeWord(word, consonantsBeforeVowel) + ENDING;
     }
     return translatedWord;
   }
 
   private boolean startsWithVowel(String word){
-    String vowels = "aeiou";
     char letter = word.charAt(0);
-    return (vowels.indexOf(letter) != -1);
+    return (VOWELS.indexOf(letter) != -1);
   }
 
   private boolean startsWithVowelEdgeCase(String word){
@@ -61,19 +62,20 @@ public class PigLatinTranslator {
     return quCheck.equals("qu");
   }
 
-  private boolean startsWithThreeConsonants(String word){
-    String vowels = "aeiou";
-    char letterOne = word.charAt(0);
-    char letterTwo = word.charAt(1);
-    char letterThree = word.charAt(2);
-    return (vowels.indexOf(letterOne) == -1 && vowels.indexOf(letterTwo) == -1 && vowels.indexOf(letterThree) == -1);
+  private int countConsonants (String word){
+    char [] charsInWord = word.toCharArray();
+    int indexOfChar;
+
+    for (indexOfChar = 0; indexOfChar < charsInWord.length; indexOfChar++){
+      if(VOWELS.indexOf(charsInWord[indexOfChar]) != -1){
+        break;
+      }
+    }
+    return indexOfChar;
   }
 
-  private boolean startsWithTwoConsonants(String word){
-    String vowels = "aeiou";
-    char letterOne = word.charAt(0);
-    char letterTwo = word.charAt(1);
-    return (vowels.indexOf(letterOne) == -1 && vowels.indexOf(letterTwo) == -1);
+  private String reArrangeWord (String word, int firstCharsToCut){
+    return word.substring(firstCharsToCut) + word.substring(0,firstCharsToCut);
   }
 
 }
