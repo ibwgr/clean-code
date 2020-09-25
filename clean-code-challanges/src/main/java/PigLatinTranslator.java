@@ -44,27 +44,25 @@ class Phrase {
     }
   }
 
+  private String translateWordToPigLatin(String sourceWord){
+    Word word = new Word(sourceWord);
+
+    while ( word.beginsWithConsonant() && !word.beginsWithQU() ){
+      word.moveFirstLetterToTheEndOfWord();
+    }
+
+    if (word.beginsWithQU()){
+      word.moveFirstTwoLettersToTheEndOfWord();
+    }
+
+    word.appendSuffix();
+
+    return word.getString();
+  }
+
   public String getTranslatedPhrase() {
     return String.join(" ",translatedPhrase);
   }
-
-
-  private String translateWordToPigLatin(String sourceWord){
-      Word word = new Word(sourceWord);
-
-      while ( word.beginsWithConsonant() && !word.beginsWithQU() ){
-        word.moveFirstLetterToTheEndOfWord();
-      }
-
-      if (word.beginsWithQU()){
-        word.moveFirstTwoLettersToTheEndOfWord();
-      }
-
-      word.appendSuffix();
-
-      return word.getString();
-  }
-
 }
 
 
@@ -115,4 +113,3 @@ class Word {
   }
 
 }
-
