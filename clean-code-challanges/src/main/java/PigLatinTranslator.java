@@ -24,11 +24,11 @@ public class PigLatinTranslator {
     String[] words = splitAndReplace(englishPhrase);
 
     for (int i = 0; i < words.length; i++) {
-      while (!beginsWithVowelSound(words[i]) && !words[i].substring(0, 2).contains("qu") || words[i].substring(1,2).contains("y")) {
+      while (!beginsWithVowelSound(words[i]) && !words[i].startsWith("qu") || words[i].substring(1,2).contains("y")) {
         words[i] = moveCharsSetToEnd(words[i], 1);
       }
 
-      if (words[i].substring(0, 2).contains("qu")) {
+      if (words[i].startsWith("qu")) {
         words[i] = moveCharsSetToEnd(words[i], 2);
       }
 
