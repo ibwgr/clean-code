@@ -35,7 +35,7 @@ public class PigLatinTranslator {
     String translatedWord = "";
 
     if(startsWithVowel(word) || startsWithVowelEdgeCase(word)){
-      translatedWord = word + "ay";
+      translatedWord = word + ENDING;
     } else if (consonantFollowedByQU(word) || startsWithThreeConsonants(word)){
       translatedWord = word.substring(3) + word.substring(0, 3) + ENDING;
     } else if (startsWithTwoConsonants(word) || word.startsWith("qu")){
