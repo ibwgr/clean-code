@@ -1,5 +1,3 @@
-package main;
-
 ;
 
 /*
@@ -28,40 +26,40 @@ public class PigLatinTranslator {
 
     String translation = "";
 
+    String[] word = englishPhrase.split(" ");
 
-    String quCluster = englishPhrase.substring(1, 3);
+    for (int w = 0; w < word.length; w++) {
+
+      translation += " ";
+
+      boolean isVowel = PigLatinTranslator.findFirstVowel(word[w].charAt(0));
 
 
-    boolean isVowel = PigLatinTranslator.findFirstVowel(englishPhrase.charAt(0));
+      String quCluster = word[w].substring(1, 3);
 
-    if (isVowel) {
 
-      return translation + (englishPhrase + "ay");
+      if (isVowel) {
+
+        translation = translation + word[w] + "ay";
+
+      } else if (word[w].substring(0, 2).equals("xr") || word[w].substring(0, 2).equals("yt")) {
+
+        translation = translation + word[w] + "ay";
+
+      } else if (quCluster.equals("qu")) {
+
+        translation = word[w].substring(3) + word[w].substring(0, 1) + quCluster + "ay";
+
+      } else if (word[w].substring(0, 2).equals("qu")) {
+
+        translation = word[w].substring(2) + word[w].substring(0, 2) + "ay";
+      } else {
+
+        String cluster = PigLatinTranslator.findConsonantCluster(word[w]);
+        translation += word[w].substring(word[w].indexOf(cluster) + cluster.length()) + cluster + "ay";
+      }
     }
-
-     else if (englishPhrase.substring(0, 2).equals("xr") || englishPhrase.substring(0,2).equals("yt")){
-
-      return translation + (englishPhrase + "ay");
-    }
-
-     else if(quCluster.equals("qu")){
-
-      return englishPhrase.substring(3) +  englishPhrase.substring(0,1) + quCluster + "ay";
-    }
-
-     else if (englishPhrase.substring(0, 2).equals("qu")){
-
-      return englishPhrase.substring(2) + englishPhrase.substring(0,2) + "ay";
-    }
-
-
-    else {
-
-      String cluster = PigLatinTranslator.findConsonantCluster(englishPhrase);
-      translation += englishPhrase.substring(englishPhrase.indexOf(cluster) + cluster.length()) + cluster + "ay";
-
-      return translation;
-    }
+    return translation.trim();
   }
 
 
@@ -109,6 +107,6 @@ public class PigLatinTranslator {
 
   public static void main(String[] args){
 
-    translate("square");
+    translate("square hallo du");
   }
 }
