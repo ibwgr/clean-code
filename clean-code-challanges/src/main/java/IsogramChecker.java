@@ -16,7 +16,23 @@
 class IsogramChecker {
 
   boolean isIsogram(String phrase) {
-    throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    return true;
   }
+/*    int counter = 0;
+    for (int i = 0; i < phrase.length(); i++) {
+      for (int j = 0; j < phrase.length(); j++) {
 
+        if (phrase.charAt(i) == (phrase.charAt(j))) {
+          counter++;
+        }
+      }
+    }
+
+      if (counter >= 2) {
+        return false;
+      } else {
+        return true;
+      }
+  }*/
 }
+
