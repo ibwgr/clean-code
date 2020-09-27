@@ -1,8 +1,9 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PigLatinUeli {
   private final String ay = "ay";
@@ -22,18 +23,21 @@ public class PigLatinUeli {
     Matcher consonantCluster = this.consonantCluster.matcher(word);
     Matcher quCluster = this.quCluster.matcher(word);
 
+    String movable;
     if (plusAy) {
-      return moveToEnd(word, "");
+      movable = "";
     } else if (quCluster.find()) {
-      return moveToEnd(word, quCluster.group(1));
+      movable = quCluster.group(1);
     } else if (consonantCluster.find()) {
-      return moveToEnd(word, consonantCluster.group(1));
+      movable = consonantCluster.group(1);
+    } else {
+      movable = word.substring(0, 1);
     }
 
-    return moveToEnd(word, word.substring(0, 1));
+    return moveToEnd(word, movable) + ay;
   }
 
   private String moveToEnd(String word, String movable) {
-    return word.substring(movable.length()) + movable + ay;
+    return word.substring(movable.length()) + movable;
   }
 }
