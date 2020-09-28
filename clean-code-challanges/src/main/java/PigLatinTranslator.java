@@ -35,12 +35,14 @@ public class PigLatinTranslator {
   private String translateWord (String word){
     String translatedWord;
 
-    if(startsWithVowel(word) || startsWithVowelEdgeCase(word)){
+    if(startsWithVowel(word) || startsWithXRorYT(word)){
       translatedWord = word + ENDING;
     } else if (consonantFollowedByQU(word)){
       translatedWord = reArrangeWord(word, 3) + ENDING;
     } else if (word.startsWith("qu")){
       translatedWord = reArrangeWord(word, 2) + ENDING;
+    } else if(startsWithYAfterConsonant(word)){
+      translatedWord = reArrangeWord(word, word.indexOf("y")) + ENDING;
     } else {
       int consonantsBeforeVowel = countConsonants(word);
       translatedWord = reArrangeWord(word, consonantsBeforeVowel) + ENDING;
@@ -53,13 +55,24 @@ public class PigLatinTranslator {
     return (VOWELS.indexOf(letter) != -1);
   }
 
-  private boolean startsWithVowelEdgeCase(String word){
+  private boolean startsWithXRorYT(String word){
     return (word.startsWith("xr") || word.startsWith("yt"));
   }
 
   private boolean consonantFollowedByQU(String word){
+    if(word.length() < 3){
+      return false;
+    } else {
     String quCheck = word.substring(1, 3);
-    return quCheck.equals("qu");
+    return quCheck.equals("qu");}
+  }
+
+  private boolean startsWithYAfterConsonant(String word){
+    if(word.length() <=2){
+    return word.substring(1,2).contains("y");
+    } else {
+      return word.substring(1,3).contains("y");
+    }
   }
 
   private int countConsonants (String word){
