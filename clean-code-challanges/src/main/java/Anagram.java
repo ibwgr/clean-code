@@ -20,41 +20,45 @@ public class Anagram {
 
   public List<String> match(List<String> candidates)  {
 
-    List<String> anagrams = new ArrayList<>();
+
+    List<String> listOfAnagrams = new ArrayList<>();
 
     String wordToCompare = this.word;
-    String str = "";
-    String w = "";
+    String sortedAnagrams = "";
+    String sortedWord = "";
 
     char[] ArrayWord = wordToCompare.toLowerCase().toCharArray();
-    w = new String(ArrayWord);
+    sortedWord = new String(ArrayWord);
 
-    for ( int i = 0; i < candidates.size(); i++){
 
-      char[] Anagrams = candidates.get(i).toCharArray();
+    for (String candidate : candidates) {
+
+      char[] Anagrams = candidate.toCharArray();
 
       Arrays.sort(Anagrams);
       Arrays.sort(ArrayWord);
-      str = new String(Anagrams);
+
+      sortedAnagrams = new String(Anagrams);
+
+      String finalAnagrams = sortedAnagrams;
 
 
-      String finalStr = str;
-      Map<String, String> result = Arrays.stream(candidates.get(i).split(" ")).map(s -> s.split("=")).collect(Collectors.toMap(
+      Map<String, String> stringMap = Arrays.stream(candidate.split(" "))
+          .map(s -> s.split("="))
+          .collect(Collectors.toMap(
+
         a -> a[0],
-        a -> finalStr
+        a -> finalAnagrams
       ));
 
-     if (w.equals(finalStr)){
+      if (sortedWord.equals(finalAnagrams)) {
 
-     anagrams.add(result.keySet().toString());
+        listOfAnagrams.addAll(stringMap.keySet());
 
-     }
+      }
     }
 
-
-
-
-    return anagrams;
+    return listOfAnagrams;
   }
 }
 
