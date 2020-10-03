@@ -1,6 +1,6 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Given a word and a list of possible anagrams, select the correct sublist.
@@ -9,32 +9,31 @@ import java.util.List;
  */
 public class Anagram {
 
-  private String anagramWord;
+  private final String anagramWord;
 
   public Anagram(String word) {
     this.anagramWord = word.toLowerCase();
   }
 
   public List<String> match(List<String> candidates) {
-
-    List<String> matchedWords = new ArrayList<>();
-
-    for (String candidateWord : candidates){
-      if(matcher(candidateWord)){
-        matchedWords.add(candidateWord);
-      }
-    }
-    return matchedWords;
+    return candidates.stream()
+      .filter(this::matcher)
+      .filter(this::isNotSameWord)
+      .collect(Collectors.toList());
   }
 
-  private boolean matcher (String candidateWord){
-    char[] anagramWordChars = anagramWord.toCharArray();
-    char[] candidateChars = candidateWord.toCharArray();
-
+  private boolean matcher(String candidateWord){
+    char[] anagramWordChars = anagramWord.toLowerCase().toCharArray();
     Arrays.sort(anagramWordChars);
-    Arrays.sort(candidateChars);
 
-    return Arrays.equals(anagramWordChars, candidateChars);
+    char[] candidateWordChars = candidateWord.toLowerCase().toCharArray();
+    Arrays.sort(candidateWordChars);
+
+    return Arrays.equals(anagramWordChars, candidateWordChars);
+  }
+
+  private boolean isNotSameWord(String candidateWord){
+    return !anagramWord.equals(candidateWord.toLowerCase());
   }
 
 }
