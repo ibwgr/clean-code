@@ -7,12 +7,35 @@
  */
 class Acronym {
 
-  Acronym(String phrase) {
+  private String phrase;
+  private String acronym = "";
 
+  Acronym(String phrase) {
+    this.phrase = phrase;
   }
 
   String get() {
-    return null;
+    String adaptedPhrase = phrase.replaceAll("[_]", "");
+    adaptedPhrase = removeConsecutiveDelimiters(adaptedPhrase);
+
+    acronym += adaptedPhrase.toUpperCase().charAt(0);
+    checkAfterEndOfWord(adaptedPhrase);
+    return acronym;
+  }
+
+  private String removeConsecutiveDelimiters(String phrase) {
+    if (phrase.contains(" -")) {
+      phrase = phrase.replace(" -", "");
+    }
+    return phrase;
+  }
+
+  private void checkAfterEndOfWord(String phrase) {
+    for (int i = 1; i <= phrase.length(); i++) {
+      if (phrase.charAt(i - 1) == ' ' || phrase.charAt(i - 1) == '-') {
+        acronym += phrase.toUpperCase().charAt(i);
+      }
+    }
   }
 
 }
