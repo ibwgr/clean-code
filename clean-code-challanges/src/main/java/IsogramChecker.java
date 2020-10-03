@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Determine if a word or phrase is an isogram.
  *
@@ -16,23 +18,16 @@
 class IsogramChecker {
 
   boolean isIsogram(String phrase) {
-    int counter = 0;
-    String adaptedPhrase = phrase.replaceAll("[\\s-]+", "");
-    System.out.println(adaptedPhrase);
-    for (int i = 0; i < adaptedPhrase.length(); i++) {
-      for (int j = 0; j < adaptedPhrase.length(); j++) {
+    String adaptedPhrase = phrase.replaceAll("[\\s-]+", "").toLowerCase();
+    char [] adaptedPhraseChar = adaptedPhrase.toCharArray();
+  	Arrays.sort(adaptedPhraseChar);
 
-        if (adaptedPhrase.charAt(i) == adaptedPhrase.charAt(j)) {
-          counter++;
-        }
-      }
-    }
-
-    if (counter >= 2) {
-      return false;
-    } else {
-      return true;
-    }
+  	for (int i = 1; i < adaptedPhraseChar.length; i++) {
+  	  if(adaptedPhraseChar[i-1] == adaptedPhraseChar[i]){
+  	    return false;
+  	  }
+  	}
+   	return true;
   }
 }
 
