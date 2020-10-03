@@ -16,23 +16,23 @@
 class IsogramChecker {
 
   boolean isIsogram(String phrase) {
-    return true;
-  }
-/*    int counter = 0;
-    for (int i = 0; i < phrase.length(); i++) {
-      for (int j = 0; j < phrase.length(); j++) {
+    int counter = 0;
+    String adaptedPhrase = phrase.replaceAll("[\\s-]+", "");
+    System.out.println(adaptedPhrase);
+    for (int i = 0; i < adaptedPhrase.length(); i++) {
+      for (int j = 0; j < adaptedPhrase.length(); j++) {
 
-        if (phrase.charAt(i) == (phrase.charAt(j))) {
+        if (adaptedPhrase.charAt(i) == adaptedPhrase.charAt(j)) {
           counter++;
         }
       }
     }
 
-      if (counter >= 2) {
-        return false;
-      } else {
-        return true;
-      }
-  }*/
+    if (counter >= 2) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
 
