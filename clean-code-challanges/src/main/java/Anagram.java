@@ -17,48 +17,66 @@ public class Anagram {
   }
 
 
-
   public List<String> match(List<String> candidates)  {
 
 
     List<String> listOfAnagrams = new ArrayList<>();
 
     String wordToCompare = this.word;
-    String sortedAnagrams = "";
-    String sortedWord = "";
 
     char[] ArrayWord = wordToCompare.toLowerCase().toCharArray();
-    sortedWord = new String(ArrayWord);
+    Arrays.sort(ArrayWord);
+    String sortedWord = new String(ArrayWord).toLowerCase();
 
 
-    for (String candidate : candidates) {
-
-      char[] Anagrams = candidate.toCharArray();
-
-      Arrays.sort(Anagrams);
-      Arrays.sort(ArrayWord);
-
-      sortedAnagrams = new String(Anagrams);
-
-      String finalAnagrams = sortedAnagrams;
+    try {
+      for (String candidate : candidates) {
 
 
-      Map<String, String> stringMap = Arrays.stream(candidate.split(" "))
+        char[] Anagrams = candidate.toLowerCase().toCharArray();
+        Arrays.sort(Anagrams);
+
+        String sortedAnagrams = new String(Anagrams).toLowerCase();
+
+        Map<String, String> stringMap = Arrays.stream(candidate.split(" "))
           .map(s -> s.split("="))
           .collect(Collectors.toMap(
 
-        a -> a[0],
-        a -> finalAnagrams
-      ));
+            a -> candidate,
+            a -> sortedAnagrams
 
-      if (sortedWord.equals(finalAnagrams)) {
+          ));
 
-        listOfAnagrams.addAll(stringMap.keySet());
+        boolean word = isUpperCase(this.word);
+        boolean anagram = isUpperCase(candidate);
 
+        if (word != anagram){
+          listOfAnagrams.isEmpty();
+        }
+
+        else if (sortedWord.equals(sortedAnagrams) && !this.word.equals(candidate.toLowerCase()))  {
+
+          listOfAnagrams.addAll(stringMap.keySet());
+        }
       }
+    }
+    catch (IllegalStateException e){
+      listOfAnagrams.isEmpty();
     }
 
     return listOfAnagrams;
+  }
+
+
+  private static boolean isUpperCase(String s){
+    for (int i=0; i<s.length(); i++)
+    {
+      if (!Character.isUpperCase(s.charAt(i)))
+      {
+        return false;
+      }
+    }
+    return true;
   }
 }
 
