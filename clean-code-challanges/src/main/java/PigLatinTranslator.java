@@ -5,7 +5,7 @@
  * but when it's spoken quickly it's really difficult for non-children (and non-native speakers) to understand.
  *
  * Rule 1: If a word begins with a vowel sound, add an "ay" sound to the end of the word.
- *  Please note that "xr" and "yt" at the beginning of a word make vowel sounds (e.g. "xray" -> "xrayay", "yttria" -> "yttriaay").
+ *  Please note that "xr" and "yt" at the beginning of a word make vowel sounds (e.g. "xray"    -> "xrayay", "yttria" -> "yttriaay").
  * Rule 2: If a word begins with a consonant sound, move it to the end of the word and then add an "ay" sound to the end of the word.
  *  Consonant sounds can be made up of multiple consonants, a.k.a. a consonant cluster (e.g. "chair" -> "airchay").
  * Rule 3: If a word starts with a consonant sound followed by "qu", move it to the end of the word, and then add an "ay" sound to the end of the word (e.g. "square" -> "aresquay").
