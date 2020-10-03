@@ -1,7 +1,8 @@
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Convert a phrase to its acronym.
@@ -12,20 +13,27 @@ import java.util.stream.Stream;
  */
 class Acronym {
   Predicate<String> isLetter = Pattern.compile("[a-zA-Z]").asPredicate();
-  String acronym;
+  StringBuilder acronym = new StringBuilder();
+  List<Character> delimiter = Collections.unmodifiableList(Arrays.asList(' ', '-', '_'));
 
   Acronym(String phrase) {
     var normalized = phrase.trim();
-    var parts = normalized.split("[ _-]");
-    acronym = Stream.of(parts)
-      .filter(part -> part.length() > 0)
-      .map(part -> part.substring(0, 1))
-      .filter(isLetter)
-      .collect(Collectors.joining())
-      .toUpperCase();
+    acronym.append(normalized.charAt(0));
+
+    var tokenIdx = 1;
+    for (var token : normalized.substring(tokenIdx).toCharArray()) {
+
+      if (isLetter.test(String.valueOf(token))) {
+        var prevToken = normalized.charAt(tokenIdx - 1);
+        if (delimiter.contains(prevToken)) {
+          acronym.append(token);
+        }
+      }
+      ++tokenIdx;
+    }
   }
 
   String get() {
-    return acronym.toUpperCase();
+    return acronym.toString().toUpperCase();
   }
 }
