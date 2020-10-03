@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -7,13 +9,32 @@ import java.util.List;
  */
 public class Anagram {
 
-  private String word;
+  private String anagramWord;
 
   public Anagram(String word) {
-    this.word = word;
+    this.anagramWord = word.toLowerCase();
   }
 
   public List<String> match(List<String> candidates) {
-    return null;
+
+    List<String> matchedWords = new ArrayList<>();
+
+    for (String candidateWord : candidates){
+      if(matcher(candidateWord)){
+        matchedWords.add(candidateWord);
+      }
+    }
+    return matchedWords;
   }
+
+  private boolean matcher (String candidateWord){
+    char[] anagramWordChars = anagramWord.toCharArray();
+    char[] candidateChars = candidateWord.toCharArray();
+
+    Arrays.sort(anagramWordChars);
+    Arrays.sort(candidateChars);
+
+    return Arrays.equals(anagramWordChars, candidateChars);
+  }
+
 }
