@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
  */
 public class Anagram {
 
-
   private String word;
 
   public Anagram(String word) {
@@ -18,7 +17,6 @@ public class Anagram {
 
 
   public List<String> match(List<String> candidates)  {
-
 
     List<String> listOfAnagrams = new ArrayList<>();
 
@@ -78,5 +76,3 @@ public class Anagram {
     return true;
   }
 }
-
-
