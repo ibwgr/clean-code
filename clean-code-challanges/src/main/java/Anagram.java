@@ -32,7 +32,6 @@ public class Anagram {
     try {
       for (String candidate : candidates) {
 
-
         char[] Anagrams = candidate.toLowerCase().toCharArray();
         Arrays.sort(Anagrams);
 
