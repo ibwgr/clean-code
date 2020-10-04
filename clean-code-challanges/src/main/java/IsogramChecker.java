@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
+
 
 /**
  * Determine if a word or phrase is an isogram.
@@ -21,7 +18,6 @@ import java.util.stream.Stream;
 class IsogramChecker {
 
   boolean isIsogram(String phrase) {
-
 
     String cleanString = phrase.replaceAll("[\\s\\-]", "");
 
