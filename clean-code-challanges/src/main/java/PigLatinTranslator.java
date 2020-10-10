@@ -70,7 +70,7 @@ class Word {
   private String word;
   private ArrayList<String> vowelSounds = new ArrayList<>(Arrays.asList("a", "e", "i", "o", "u"));
   private ArrayList<String>  vowelSoundsCluster = new ArrayList<>(Arrays.asList("yt", "xr"));
-  private String specialCombo = "qu";
+  private String qu = "qu";
   private String suffix = "ay";
 
   Word(String word){
@@ -93,7 +93,7 @@ class Word {
 
   public boolean beginsWithQU( ){
     String firstTwoLetters =  word.substring(0,2).toLowerCase();
-    return (firstTwoLetters.equals(specialCombo));
+    return (firstTwoLetters.equals(qu));
   }
 
   public void appendSuffix() {
