@@ -47,7 +47,7 @@ class Phrase {
   private String translateWordToPigLatin(String sourceWord){
     Word word = new Word(sourceWord);
 
-    while ( word.beginsWithConsonant() && !word.beginsWithQU() ){
+    while ( word.beginsWithSingleConsonant() && !word.beginsWithQU() && !word.isTwoLetterLongAndEndsWithY() ){
       word.moveFirstLetterToTheEndOfWord();
     }
 
@@ -55,7 +55,11 @@ class Phrase {
       word.moveFirstTwoLettersToTheEndOfWord();
     }
 
-    word.appendSuffix();
+    if (word.isTwoLetterLongAndEndsWithY()){
+      word.moveFirstLetterToTheEndOfWord();
+    }
+
+    word.appendAy();
 
     return word.getString();
   }
@@ -71,7 +75,7 @@ class Word {
   private ArrayList<String> vowelSounds = new ArrayList<>(Arrays.asList("a", "e", "i", "o", "u"));
   private ArrayList<String>  vowelSoundsCluster = new ArrayList<>(Arrays.asList("yt", "xr"));
   private String qu = "qu";
-  private String suffix = "ay";
+  private String ay = "ay";
 
   Word(String word){
     this.word = word;
@@ -87,17 +91,21 @@ class Word {
     return vowelSoundsCluster.contains(firstTwoLetters);
   }
 
-  public boolean beginsWithConsonant(){
+  public boolean beginsWithSingleConsonant(){
     return !beginsWithVowelSound() && !beginsWithVowelSoundCluster();
   }
 
-  public boolean beginsWithQU( ){
+  public boolean beginsWithQU(){
     String firstTwoLetters =  word.substring(0,2).toLowerCase();
     return (firstTwoLetters.equals(qu));
   }
 
-  public void appendSuffix() {
-    word = word + suffix;
+  public boolean isTwoLetterLongAndEndsWithY(){
+    return ( word.length() == 2 && word.substring(1).toLowerCase().equals("y") );
+  }
+
+  public void appendAy() {
+    word = word + ay;
   }
 
   public void moveFirstLetterToTheEndOfWord(){
