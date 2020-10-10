@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Implement a program that translates from English to Pig Latin.
  *
@@ -18,6 +22,102 @@
 public class PigLatinTranslator {
 
   public String translate(String englishPhrase) {
-    return null;
+    Phrase phrase = new Phrase(englishPhrase);
+    phrase.translateToPigLatin();
+    return phrase.getTranslatedPhrase();
   }
+
+}
+
+
+class Phrase {
+  private List<String> sourcePhrase;
+  private List<String> translatedPhrase = new ArrayList<>();
+
+  Phrase(String sourcePhrase){
+    this.sourcePhrase = Arrays.asList(sourcePhrase.split(" "));
+  }
+
+  public void translateToPigLatin() {
+    for (String sourceWord : sourcePhrase){
+      translatedPhrase.add(translateWordToPigLatin(sourceWord));
+    }
+  }
+
+  private String translateWordToPigLatin(String sourceWord){
+    Word word = new Word(sourceWord);
+
+    while ( word.beginsWithSingleConsonant() && !word.beginsWithQU() && !word.isTwoLetterLongAndEndsWithY() ){
+      word.moveFirstLetterToTheEndOfWord();
+    }
+
+    if (word.beginsWithQU()){
+      word.moveFirstTwoLettersToTheEndOfWord();
+    }
+
+    if (word.isTwoLetterLongAndEndsWithY()){
+      word.moveFirstLetterToTheEndOfWord();
+    }
+
+    word.appendAy();
+
+    return word.getString();
+  }
+
+  public String getTranslatedPhrase() {
+    return String.join(" ",translatedPhrase);
+  }
+}
+
+
+class Word {
+  private String word;
+  private ArrayList<String> vowelSounds = new ArrayList<>(Arrays.asList("a", "e", "i", "o", "u"));
+  private ArrayList<String>  vowelSoundsCluster = new ArrayList<>(Arrays.asList("yt", "xr"));
+  private String qu = "qu";
+  private String ay = "ay";
+
+  Word(String word){
+    this.word = word;
+  }
+
+  private boolean beginsWithVowelSound(){
+    String firstLetter =  word.substring(0,1).toLowerCase();
+    return vowelSounds.contains(firstLetter);
+  }
+
+  private boolean beginsWithVowelSoundCluster(){
+    String firstTwoLetters =  word.substring(0,2).toLowerCase();
+    return vowelSoundsCluster.contains(firstTwoLetters);
+  }
+
+  public boolean beginsWithSingleConsonant(){
+    return !beginsWithVowelSound() && !beginsWithVowelSoundCluster();
+  }
+
+  public boolean beginsWithQU(){
+    String firstTwoLetters =  word.substring(0,2).toLowerCase();
+    return (firstTwoLetters.equals(qu));
+  }
+
+  public boolean isTwoLetterLongAndEndsWithY(){
+    return ( word.length() == 2 && word.substring(1).toLowerCase().equals("y") );
+  }
+
+  public void appendAy() {
+    word = word + ay;
+  }
+
+  public void moveFirstLetterToTheEndOfWord(){
+    word = word.substring(1) + word.charAt(0);
+  }
+
+  public void moveFirstTwoLettersToTheEndOfWord(){
+    word = word.substring(2) + word.charAt(0) + word.charAt(1);
+  }
+
+  public String getString(){
+    return word;
+  }
+
 }
