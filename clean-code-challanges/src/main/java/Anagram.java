@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -7,11 +9,36 @@ import java.util.List;
  */
 public class Anagram {
 
-  public Anagram(String word) {
+  private String word;
 
+  public Anagram(String word) {
+    this.word = word;
   }
 
   public List<String> match(List<String> candidates) {
-    return null;
+
+    List <String> anagrams = new ArrayList<>();
+    String sortedWord = getSortedWord(word);
+
+    if (candidates == null || candidates.size() == 0) {
+      return null;
+    }
+
+    for (String candidate : candidates) {
+      if (word.toLowerCase().equals(candidate.toLowerCase())) {
+        continue;
+      }
+      String sortedCandidate = getSortedWord(candidate);
+      if (sortedWord.equals(sortedCandidate)) {
+        anagrams.add(candidate);
+      }
+    }
+    return anagrams;
+  }
+
+  public String getSortedWord(String word) {
+    char [] letters = word.toLowerCase().toCharArray();
+    Arrays.sort(letters);
+    return new String(letters);
   }
 }
