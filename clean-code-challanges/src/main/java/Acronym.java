@@ -9,21 +9,19 @@ import java.util.stream.Collectors;
  * Help generate some jargon by writing a program that converts a long name like Portable Network Graphics to its acronym (PNG).
  */
 class Acronym {
-  private final String phrase;
+  private final String cleanedPhrase;
+  private final String whitespaces = "\\s";
 
   Acronym(String phrase) {
     phrase = phrase.replaceAll("-", " ");
-    this.phrase = phrase.replaceAll("[^A-Za-z\\s]", "");
+    this.cleanedPhrase = phrase.replaceAll("[^A-Za-z" + whitespaces + "]", "");
   }
 
   String get() {
-    System.out.println(phrase);
-    return Arrays.stream(phrase.split("\\s"))
+    return Arrays.stream(cleanedPhrase.split(whitespaces))
       .filter(s -> !s.isEmpty())
       .map(s -> s.toUpperCase().charAt(0))
       .map(Object::toString)
       .collect(Collectors.joining());
-
   }
-
 }
