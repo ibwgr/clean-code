@@ -12,6 +12,7 @@ class Acronym {
   private final String phrase;
 
   Acronym(String phrase) {
+    phrase = phrase.replaceAll("-", " ");
     this.phrase = phrase.replaceAll("[^A-Za-z\\s]", "");
   }
 
