@@ -21,7 +21,6 @@ class IsogramChecker {
   boolean isIsogram(String phrase) {
       Set<Character> chars = new HashSet<Character>();
       for (Character character : phrase.toCharArray()) {
-        // characters to ignore
         if (character == ' ' || character == '-')
           continue;
         else if (chars.contains(Character.toUpperCase(character)))
