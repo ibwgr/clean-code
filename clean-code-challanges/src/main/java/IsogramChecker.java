@@ -1,3 +1,6 @@
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Determine if a word or phrase is an isogram.
  *
@@ -16,7 +19,16 @@
 class IsogramChecker {
 
   boolean isIsogram(String phrase) {
-    throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+      Set<Character> chars = new HashSet<Character>();
+      for (Character character : phrase.toCharArray()) {
+        // characters to ignore
+        if (character == ' ' || character == '-')
+          continue;
+        else if (chars.contains(Character.toUpperCase(character)))
+          return false;
+        else
+          chars.add(Character.toUpperCase(character));
+      }
+      return true;
+    }
   }
-
-}
