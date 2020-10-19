@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * Determine if a word or phrase is an isogram.
  *
@@ -13,10 +15,16 @@
  *
  * The word isograms, however, is not an isogram, because the s repeats.
  */
-class IsogramChecker {
+public class IsogramChecker {
 
-  boolean isIsogram(String phrase) {
-    throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+  public boolean isIsogram(String phrase) {
+    //throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    //}
+
+    if (phrase.length() > 1) {
+      phrase = phrase.toLowerCase().replaceAll(" ", "").replaceAll("-", "");
+      return phrase.length() == phrase.chars().distinct().count();
+    }
+    return true;
   }
-
 }
