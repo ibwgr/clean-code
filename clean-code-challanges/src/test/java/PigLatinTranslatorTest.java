@@ -1,3 +1,6 @@
+package test.java;
+
+import main.java.PigLatinTranslator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -71,5 +74,4 @@ public class PigLatinTranslatorTest {
   public void test() {
     assertEquals(pigLatinTranslation, new PigLatinTranslator().translate(englishPhrase));
   }
-
 }
