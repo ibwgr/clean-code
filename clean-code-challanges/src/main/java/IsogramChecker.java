@@ -1,3 +1,6 @@
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * Determine if a word or phrase is an isogram.
  *
@@ -16,7 +19,8 @@
 class IsogramChecker {
 
   boolean isIsogram(String phrase) {
-    throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    String letters = phrase.replaceAll("[^a-zA-Z]", "").toLowerCase();
+    Set<Character> distinctChars = letters.chars().mapToObj(c -> (char) c).collect(Collectors.toSet());
+    return distinctChars.size() == letters.length();
   }
-
 }
