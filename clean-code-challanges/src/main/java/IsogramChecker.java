@@ -1,3 +1,5 @@
+
+
 /**
  * Determine if a word or phrase is an isogram.
  *
@@ -16,7 +18,9 @@
 class IsogramChecker {
 
   boolean isIsogram(String phrase) {
-    throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
-  }
 
+    String cleanString = phrase.replaceAll("[\\s\\-]", "");
+
+    return cleanString.length() == cleanString.toUpperCase().chars().distinct().count();
+  }
 }
