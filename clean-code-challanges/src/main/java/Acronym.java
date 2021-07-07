@@ -7,12 +7,19 @@
  */
 class Acronym {
 
-  Acronym(String phrase) {
+  private final String phrase;
 
+  Acronym(String phrase) {
+        this.phrase = phrase;
   }
 
   String get() {
-    return null;
+    StringBuffer acronym = new StringBuffer();
+    String[] words = phrase.trim().split("[\\s-_]+");
+    for(String word : words) {
+      acronym.append(word.toUpperCase().charAt(0));
+    }
+    return acronym.toString();
   }
 
 }
