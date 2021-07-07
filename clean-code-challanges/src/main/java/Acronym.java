@@ -1,3 +1,5 @@
+
+
 /**
  * Convert a phrase to its acronym.
  *
@@ -7,12 +9,25 @@
  */
 class Acronym {
 
+  private String word;
+
   Acronym(String phrase) {
 
+    this.word = phrase;
   }
+
 
   String get() {
-    return null;
-  }
 
+    String cleanString = this.word.replaceAll("[\\-_]",  " ");
+    String moreCleanerString = cleanString.trim().replaceAll("[ ]{2,}", " ");
+
+    StringBuilder acronym = new StringBuilder();
+
+    for (String s : moreCleanerString.split(" "))
+
+      acronym.append(s.charAt(0));
+
+    return acronym.toString().toUpperCase();
+  }
 }
