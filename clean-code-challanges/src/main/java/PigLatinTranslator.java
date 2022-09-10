@@ -18,6 +18,7 @@
 public class PigLatinTranslator {
 
   public String translate(String englishPhrase) {
+    System.out.println("Test");
     return null;
   }
 }
