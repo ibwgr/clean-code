@@ -8,7 +8,7 @@
 class Acronym {
 
   Acronym(String phrase) {
-
+String test = "test";
   }
 
   String get() {
