@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Implement a program that translates from English to Pig Latin.
  *
@@ -18,6 +21,39 @@
 public class PigLatinTranslator {
 
   public String translate(String englishPhrase) {
-    return null;
+    String[] words = splitAndReplace(englishPhrase);
+
+    for (int i = 0; i < words.length; i++) {
+      while (!beginsWithVowelSound(words[i]) && !words[i].startsWith("qu") || words[i].substring(1,2).contains("y")) {
+        words[i] = moveCharsSetToEnd(words[i], 1);
+      }
+
+      if (words[i].startsWith("qu")) {
+        words[i] = moveCharsSetToEnd(words[i], 2);
+      }
+
+      words[i] = words[i] + "ay";
+    }
+
+    return String.join(" ", words);
+  }
+
+  private String[] splitAndReplace(String englishPhrase) {
+    String[] words = englishPhrase.split(" ");
+    for (int i = 0; i < words.length; i++) {
+      words[i] = words[i].replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+    }
+
+    return words;
+  }
+
+  public boolean beginsWithVowelSound(String word) {
+    List<Character> vowelChars = Arrays.asList('a', 'i', 'e', 'o', 'u');
+    List<String> vowelSounds = Arrays.asList("xr", "yt");
+    return vowelChars.contains(word.charAt(0)) || vowelSounds.contains(word.substring(0, 2));
+  }
+
+  public String moveCharsSetToEnd(String word, int numberOfChar) {
+    return word.substring(numberOfChar) + word.substring(0, numberOfChar);
   }
 }
