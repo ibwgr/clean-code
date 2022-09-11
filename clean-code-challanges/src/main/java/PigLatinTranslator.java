@@ -67,7 +67,8 @@ public class PigLatinTranslator {
       englishWord = moveNCharactersToEndOfWord(englishWord, getFirstOccuranceOfVocalOrY(englishWord));
       return appendWordByLangAppender(englishWord);
     }
-    return "";
+
+    return appendWordByLangAppender(englishWord);
   }
 
   private boolean isFirstCharacterVocal(String word) {
