@@ -17,7 +17,78 @@
  */
 public class PigLatinTranslator {
 
+  private static final String VOWELS = "aeiou";
+  private static final String ENDING = "ay";
+
   public String translate(String englishPhrase) {
-    return null;
+
+    StringBuilder translation = new StringBuilder();
+    String [] englishWords = englishPhrase.toLowerCase().split(" ");
+
+    for (String wordToTranslate : englishWords){
+      translation.append(translateWord(wordToTranslate));
+      translation.append(" ");
+    }
+    return translation.toString().trim();
   }
+
+  private String translateWord (String word){
+    String translatedWord;
+
+    if(startsWithVowel(word) || startsWithXRorYT(word)){
+      translatedWord = word + ENDING;
+    } else if (consonantFollowedByQU(word)){
+      translatedWord = reArrangeWord(word, 3) + ENDING;
+    } else if (word.startsWith("qu")){
+      translatedWord = reArrangeWord(word, 2) + ENDING;
+    } else if(startsWithYAfterConsonant(word)){
+      translatedWord = reArrangeWord(word, word.indexOf("y")) + ENDING;
+    } else {
+      int consonantsBeforeVowel = countConsonants(word);
+      translatedWord = reArrangeWord(word, consonantsBeforeVowel) + ENDING;
+    }
+    return translatedWord;
+  }
+
+  private boolean startsWithVowel(String word){
+    char letter = word.charAt(0);
+    return (VOWELS.indexOf(letter) != -1);
+  }
+
+  private boolean startsWithXRorYT(String word){
+    return (word.startsWith("xr") || word.startsWith("yt"));
+  }
+
+  private boolean consonantFollowedByQU(String word){
+    if(word.length() < 3){
+      return false;
+    } else {
+    String quCheck = word.substring(1, 3);
+    return quCheck.equals("qu");}
+  }
+
+  private boolean startsWithYAfterConsonant(String word){
+    if(word.length() <=2){
+    return word.substring(1,2).contains("y");
+    } else {
+      return word.substring(1,3).contains("y");
+    }
+  }
+
+  private int countConsonants (String word){
+    char [] charsInWord = word.toCharArray();
+    int indexOfChar;
+
+    for (indexOfChar = 0; indexOfChar < charsInWord.length; indexOfChar++){
+      if(VOWELS.indexOf(charsInWord[indexOfChar]) != -1){
+        break;
+      }
+    }
+    return indexOfChar;
+  }
+
+  private String reArrangeWord (String word, int firstCharsToCut){
+    return word.substring(firstCharsToCut) + word.substring(0,firstCharsToCut);
+  }
+
 }
