@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,11 +8,23 @@ import java.util.List;
  */
 public class Anagram {
 
-  public Anagram(String word) {
+  public String word;
 
+  public Anagram(String word) {
+    this.word = word;
   }
 
+
+
   public List<String> match(List<String> candidates) {
+
+    ArrayList<String> liste1 = new ArrayList<String>();
+    liste1.add("enlist");
+    liste1.add("google");
+    liste1.add("inlets");
+    liste1.add("banana");
+
+
     return null;
   }
 }
