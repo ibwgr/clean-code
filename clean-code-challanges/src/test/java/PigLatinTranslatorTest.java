@@ -16,7 +16,7 @@ public class PigLatinTranslatorTest {
   @Parameterized.Parameters(name = "{index}: expected \"{0}\" to translate to the pig latin phrase \"{1}\"")
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][]{
-      // Ay is added to words that start with vowels
+      // Ay is added to words that start with
       {"apple", "appleay"},
       {"ear", "earay"},
       {"igloo", "iglooay"},
