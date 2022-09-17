@@ -37,7 +37,7 @@ public class PigLatinTranslator {
     for (String word : words){
       if (isFirstLetterVowel(word) || isWordStartingWithXrOrYt(word)){
         words.set(words.indexOf(word), appendAy(word));
-      } else if (isConsonantClusterFollwedByY(word)){
+      } else if (isConsonantClusterFollowedByY(word)){
         words.set(words.indexOf(word), appendTwoFirstLetterAy(word));
       }else if (isConsonantFollowedByQu(word)){
         words.set(words.indexOf(word), appendThreeFirstLetterAy(word));
@@ -60,7 +60,6 @@ public class PigLatinTranslator {
     for (String word : words){
       cleanWords.add(word.replaceAll("[^\\w]", ""));
     }
-    System.out.println(cleanWords);
 
     return cleanWords;
   }
@@ -98,7 +97,7 @@ public class PigLatinTranslator {
     return isFirstLetterConsonant(word) && secondAndThirdLetter.equals(qu);
   }
 
-  private boolean isConsonantClusterFollwedByY(String word){
+  private boolean isConsonantClusterFollowedByY(String word){
     String thirdLetter = "";
     if (isMinLengthThree(word)){
       thirdLetter = word.substring(2,3);
