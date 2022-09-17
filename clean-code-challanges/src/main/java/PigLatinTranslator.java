@@ -54,17 +54,17 @@ public class PigLatinTranslator {
     }
 
     if(isFirstCharacterY(englishWord)) {
-      englishWord = moveNCharactersToEndOfWord(englishWord, 1);
+      englishWord = moveCharactersToEndOfWord(englishWord, 1);
       return appendWordByLangAppender(englishWord);
     }
 
     if(getStartIfFirstSecondThirdChar_a_qu(englishWord)>-1) {
-      englishWord = moveNCharactersToEndOfWord(englishWord, (getStartIfFirstSecondThirdChar_a_qu(englishWord)+2));
+      englishWord = moveCharactersToEndOfWord(englishWord, (getStartIfFirstSecondThirdChar_a_qu(englishWord)+2));
       return appendWordByLangAppender(englishWord);
     }
 
     if(getFirstOccuranceOfVocalOrY(englishWord)>-1) {
-      englishWord = moveNCharactersToEndOfWord(englishWord, getFirstOccuranceOfVocalOrY(englishWord));
+      englishWord = moveCharactersToEndOfWord(englishWord, getFirstOccuranceOfVocalOrY(englishWord));
       return appendWordByLangAppender(englishWord);
     }
 
@@ -87,8 +87,8 @@ public class PigLatinTranslator {
       return word.toLowerCase(Locale.ROOT).indexOf(QU)<=3 ? word.toLowerCase(Locale.ROOT).indexOf(QU) : -1;
   }
 
-  private String moveNCharactersToEndOfWord(String word, int n) {
-    return word.substring(n).concat(word.substring(0,n));
+  private String moveCharactersToEndOfWord(String word, int numberOfCharactersToMove) {
+    return word.substring(numberOfCharactersToMove).concat(word.substring(0,numberOfCharactersToMove));
   }
 
   private String appendWordByLangAppender(String word) {
