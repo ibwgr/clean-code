@@ -17,6 +17,19 @@
  */
 public class PigLatinTranslator {
 
+  public String translate(String englishPhrase) {
+    String[] arrEnglishPhraseSplit = englishPhrase.split(" ");
+    String pigPhrase = "";
+
+    for (int i = 0; i < arrEnglishPhraseSplit.length - 1; i++) {
+      pigPhrase += String.join("", translateWord(arrEnglishPhraseSplit[i]), " ");
+    }
+    pigPhrase += translateWord(arrEnglishPhraseSplit[arrEnglishPhraseSplit.length - 1]);
+
+    return pigPhrase;
+  }
+
+
   public String translateWord(String splitWordFromEnglishPhrase) {
     String engWord = splitWordFromEnglishPhrase;
 
@@ -79,17 +92,7 @@ public class PigLatinTranslator {
     return bIsConsonantFirstChar;
   }
 
-  public String translate(String englishPhrase) {
-    String[] arrEnglishPhraseSplit = englishPhrase.split(" ");
-    String pigPhrase = "";
 
-    for (int i = 0; i < arrEnglishPhraseSplit.length - 1; i++) {
-      pigPhrase += String.join("", translateWord(arrEnglishPhraseSplit[i]), "_");
-    }
-    pigPhrase += translateWord(arrEnglishPhraseSplit[arrEnglishPhraseSplit.length - 1]);
-
-    return pigPhrase;
-  }
 
 
   public boolean findVowelFirstChar(String engWord) {
