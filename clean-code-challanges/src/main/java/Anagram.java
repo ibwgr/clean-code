@@ -26,10 +26,12 @@ public class Anagram {
   public List<String> match(List<String> candidates) {
     List<String> matchingWords = new ArrayList<>();
     String sortedWords = sortLetters(this.word);
-    for(String word : candidates) {
-      String sortedWordToMatch = sortLetters(word);
-      if(sortedWords.equals(sortedWordToMatch) && !this.word.toLowerCase(Locale.ROOT).equals(word.toLowerCase(Locale.ROOT))) {
-        matchingWords.add(word);
+    for(String candiate : candidates) {
+      if(!this.word.toLowerCase(Locale.ROOT).equals(candiate.toLowerCase(Locale.ROOT))) {
+        String sortedWordToMatch = sortLetters(candiate);
+        if(sortedWords.equals(sortedWordToMatch)) {
+          matchingWords.add(candiate);
+        }
       }
     }
     return matchingWords;
