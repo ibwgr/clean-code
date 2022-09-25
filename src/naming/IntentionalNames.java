@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 // Kapitel 2.2
 public class IntentionalNames {
 
+}
+
   /*
    * Ausgangslage
    *
