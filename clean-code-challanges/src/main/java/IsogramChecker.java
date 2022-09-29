@@ -1,3 +1,8 @@
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Determine if a word or phrase is an isogram.
  *
@@ -15,8 +20,25 @@
  */
 class IsogramChecker {
 
+
   boolean isIsogram(String phrase) {
-    throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    String cleanedPhrase = phrase.replaceAll("-| ", "").toLowerCase(Locale.ROOT);
+    int len = cleanedPhrase.length();
+
+    char[] letters = cleanedPhrase.toCharArray();
+
+    Arrays.sort(letters);
+    return checkNotSameLetter(letters, len);
+
+  }
+
+
+  private boolean checkNotSameLetter(char [] letters, int len){
+    for (int i = 0; i < len - 1; i++) {
+      if (letters[i] == letters[i + 1])
+        return false;
+    }
+    return true;
   }
 
 }
