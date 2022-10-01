@@ -1,5 +1,4 @@
 import java.util.Locale;
-
 /**
  * Convert a phrase to its acronym.
  *
