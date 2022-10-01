@@ -26,9 +26,10 @@ class IsogramChecker {
 
   private Boolean checkForDoubleChars(String phrase) {
     String partPhraseToTest = phrase.toLowerCase(Locale.ROOT);
-    for (char testedCharacter : partPhraseToTest.toCharArray()) {
+    for (char charUnderTest : partPhraseToTest.toCharArray()) {
       partPhraseToTest = partPhraseToTest.substring(1);
-      if(partPhraseToTest.indexOf(testedCharacter) != -1) {
+      boolean charFoundInPartPhrase = partPhraseToTest.indexOf(charUnderTest) != -1;
+      if(charFoundInPartPhrase) {
         return true;
       }
     }
