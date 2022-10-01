@@ -1,3 +1,7 @@
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Determine if a word or phrase is an isogram.
  *
@@ -16,7 +20,26 @@
 class IsogramChecker {
 
   boolean isIsogram(String phrase) {
-    throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    phrase = removeSpacesAndHypens(phrase);
+    return !checkForDoubleChars(phrase);
   }
+
+  private Boolean checkForDoubleChars(String phrase) {
+    String partPhraseToTest = phrase.toLowerCase(Locale.ROOT);
+    for (char charUnderTest : partPhraseToTest.toCharArray()) {
+      partPhraseToTest = partPhraseToTest.substring(1);
+      boolean charFoundInPartPhrase = partPhraseToTest.indexOf(charUnderTest) != -1;
+      if(charFoundInPartPhrase) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private String removeSpacesAndHypens(String phrase) {
+    return phrase.replace(" ", "").replace("-", "");
+  }
+
+
 
 }
