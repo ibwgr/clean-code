@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Determine if a word or phrase is an isogram.
  *
@@ -15,8 +17,32 @@
  */
 class IsogramChecker {
 
+
   boolean isIsogram(String phrase) {
-    throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    String sortedPhrase = stringSortAlphabet(phrase.toUpperCase());
+    char[] charSortedPhrase = sortedPhrase.toCharArray();
+    char testingLetter = '$';
+    boolean status = false;
+    if (charSortedPhrase.length >1){
+      for (char letter : charSortedPhrase) {
+        if (testingLetter == letter && (letter !=' ' && letter !='-')){
+          status = false;
+          break;
+        }else {
+          status = true;
+        }
+        testingLetter = letter;
+      }
+    }else {
+      status = true;
+    }
+    return status;
+  }
+
+  private String stringSortAlphabet(String word){
+    char[] stringToChar = word.toCharArray();
+    Arrays.sort(stringToChar);
+    return new String(stringToChar);
   }
 
 }
