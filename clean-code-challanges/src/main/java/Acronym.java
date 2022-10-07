@@ -10,9 +10,6 @@ import java.util.regex.Pattern;
  * Help generate some jargon by writing a program that converts a long name like Portable Network Graphics to its acronym (PNG).
  */
 class Acronym {
-  public static void main(String[] args) {
-    new Acronym("First In, First Out").get();
-  }
   String text;
 
   Acronym(String phrase) {

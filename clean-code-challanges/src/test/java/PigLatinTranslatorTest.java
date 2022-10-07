@@ -1,3 +1,4 @@
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -67,6 +68,7 @@ public class PigLatinTranslatorTest {
     this.pigLatinTranslation = pigLatinTranslation;
   }
 
+  @Ignore
   @Test
   public void test() {
     assertEquals(pigLatinTranslation, new PigLatinTranslator().translate(englishPhrase));
